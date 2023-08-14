@@ -7,6 +7,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:school_trail/for_parents_or_staff.dart';
+import 'package:school_trail/signup.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           "/Home": (BuildContext context) => const MyHomePage(),
           "/ForStaff": (BuildContext context) => const ForStaffPage(),
           "/ForParents": (BuildContext context) => const ForParentsPage(),
+          "/SignUp": (BuildContext context) => const SignUpPage(),
         }
       ),
     );
@@ -68,8 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(), // Expand image to entire screen
-        decoration: const BoxDecoration( // Set background image
-          image: DecorationImage(
+        decoration: BoxDecoration( // Set background image and colour
+          color: const Color.fromRGBO(243, 245, 249, 1).withOpacity(0.8),
+          image: const DecorationImage(
             image: AssetImage("assets/images/fullbackground_imgv2.png"),
             fit: BoxFit.cover,
           )
@@ -158,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     shadowColor: const Color.fromRGBO(173, 159, 125, 1),
                     foregroundColor: Colors.transparent,
                     surfaceTintColor: Colors.transparent,
-                    side: BorderSide.none,
+                    side: BorderSide.none, // Removes border line
                   ),
                   child: const Text(
                     "For School Staff",

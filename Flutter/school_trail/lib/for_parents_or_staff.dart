@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_trail/signup.dart';
 
 // FOR STAFF PAGE
 
@@ -21,8 +22,9 @@ class _ForStaffPageState extends State<ForStaffPage> {
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(), // Expand image to entire screen
-        decoration: const BoxDecoration( // Set background image
-          image: DecorationImage(
+        decoration: BoxDecoration( // Set background image and colour
+          color: const Color.fromRGBO(243, 245, 249, 1).withOpacity(0.8),
+          image: const DecorationImage(
             image: AssetImage("assets/images/fullbackground_imgv2.png"),
             fit: BoxFit.cover,
           )
@@ -163,7 +165,7 @@ class _ForStaffPageState extends State<ForStaffPage> {
 
                     // OR TEXT
                     const Padding(
-                      padding: EdgeInsets.only(top: 5),
+                      padding: EdgeInsets.only(top: 10),
                       child: Text(
                         "or",
                         style: TextStyle(
@@ -228,8 +230,9 @@ class _ForParentsPageState extends State<ForParentsPage> {
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(), // Expand image to entire screen
-        decoration: const BoxDecoration( // Set background image
-          image: DecorationImage(
+        decoration: BoxDecoration( // Set background image and colour
+          color: const Color.fromRGBO(243, 245, 249, 1).withOpacity(0.8),
+          image: const DecorationImage(
             image: AssetImage("assets/images/fullbackground_imgv2.png"),
             fit: BoxFit.cover,
           )
@@ -345,7 +348,8 @@ class _ForParentsPageState extends State<ForParentsPage> {
                         width: 320,
                         child: ElevatedButton(
                           onPressed: (){
-                            Navigator.of(context).pushNamed("/Home"); // Goes to page on click
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUpPage(),
+                            maintainState: false)); // Goes to page on click
                           }, 
                           style: ElevatedButton.styleFrom(
                             elevation: 2.0, // Makes shadow more pronounced
@@ -370,7 +374,7 @@ class _ForParentsPageState extends State<ForParentsPage> {
 
                     // OR TEXT
                     const Padding(
-                      padding: EdgeInsets.only(top: 5),
+                      padding: EdgeInsets.only(top: 10),
                       child: Text(
                         "or",
                         style: TextStyle(
