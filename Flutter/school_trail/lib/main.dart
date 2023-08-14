@@ -1,125 +1,198 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:developer';
+import 'dart:math';
+import 'dart:ui';
+import 'package:collection/collection.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    FlutterNativeSplash.remove();
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false, //removes the debug tag
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          fontFamily: 'Open Sans',
+        ),
+        home: const MyHomePage(), // Sets home page
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
+// Controls state of app
+class MyAppState extends ChangeNotifier {}
+
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+  // Home Screen
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Container(
+        constraints: const BoxConstraints.expand(), // Expand image to entire screen
+        decoration: const BoxDecoration( // Set background image
+          image: DecorationImage(
+            image: AssetImage("assets/images/fullbackground_imgv2.png"),
+            fit: BoxFit.cover,
+          )
+        ),
+
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            // LOGO & SUBTEXT
+            Padding(
+              padding: const EdgeInsets.only(top: 40), // NTS: adjust for device size
+              child: Container(
+                width: 89, // NTS: adjust for device size
+                height: 89,
+                decoration: const BoxDecoration( // Set logo image
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/logo.png"),
+                    fit: BoxFit.cover,
+                    )
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            const Text( // Text under logo
+              "SCHOOL TRAIL",
+              style: TextStyle(
+                fontFamily: "Rajdhani",
+                fontSize: 38, // NTS: adjust for device size
+              ),
             ),
+
+            // TEXT UNDER LOGO & SUBTEXT
+            const Padding(
+              padding: EdgeInsets.only(top: 40, left: 20, right: 20), // NTS: adjust for device size
+              child: Text(
+                "A simple way to keep track \nof classes and students",
+                textAlign: TextAlign.center, // Keeps text centered
+                style: TextStyle(
+                  fontFamily: "Calistoga",
+                  fontSize: 38, // NTS: adjust for device size
+                  letterSpacing: 0.0,
+                  height: 1.1,
+                ),
+              ),
+            ),
+
+            const Padding(
+              padding: EdgeInsets.only(top: 20, left: 20, right: 20), // NTS: adjust for device size
+              child: Text(
+                "Whether you're a school staff member or\nparent, there's a place for you at School\nTrail. Track student progress from daycare\nthrough high school in our centralised,\neasy-to-use system.",
+                textAlign: TextAlign.center, // Keeps text centered
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 14, // NTS: adjust for device size
+                  color: Color.fromRGBO(90, 109, 124, 1)
+                ),
+              ),
+            ),
+
+            // FOR SCHOOL STAFF BUTTON
+            Padding(
+              padding: const EdgeInsets.only(top: 15), // NTS: adjust for device size
+              child: SizedBox(
+                height: 50, // NTS: adjust for device size
+                width: 320,
+                child: ElevatedButton(
+                  onPressed: (){}, 
+                  style: ElevatedButton.styleFrom(
+                    elevation: 1.0, // Makes shadow more pronounced
+                    backgroundColor: const Color.fromRGBO(255, 221, 133, 1),
+                    shadowColor: const Color.fromRGBO(173, 159, 125, 1),
+                    foregroundColor: Colors.transparent,
+                    surfaceTintColor: Colors.transparent,
+                    side: BorderSide.none,
+                  ),
+                  child: const Text(
+                    "For School Staff",
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 16, // NTS: adjust for device size
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(80, 57, 0, 1)
+                      ),
+                    ),
+                  ),
+              ),
+            ),
+
+            // FOR PARENTS BUTTON
+            Padding(
+              padding: const EdgeInsets.only(top: 15, bottom: 5), // NTS: adjust for device size
+              child: SizedBox(
+                height: 50, // NTS: adjust for device size
+                width: 320,
+                child: ElevatedButton(
+                  onPressed: (){}, 
+                  style: ElevatedButton.styleFrom(
+                    elevation: 1.0, // Makes shadow more pronounced
+                    backgroundColor: const Color.fromRGBO(255, 221, 133, 1),
+                    shadowColor: const Color.fromRGBO(173, 159, 125, 1),
+                    foregroundColor: Colors.transparent,
+                    surfaceTintColor: Colors.transparent,
+                    side: BorderSide.none,
+                  ),
+                  child: const Text(
+                    "For Parents",
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 16, // NTS: adjust for device size
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(80, 57, 0, 1)
+                      ),
+                    ),
+                  ),
+              ),
+            ),
+
+            // SEE SCHOOL PRICING PLANS BUTTON
+            TextButton(
+              onPressed: (){}, 
+              child: const Text(
+                "See School Pricing Plans",
+                style: TextStyle(
+                  shadows: [ // I make the original text transparent and use a shadow instead to position it better above the underline
+                    Shadow(
+                      color: Color.fromRGBO(45, 62, 74, 1),
+                      offset: Offset(0, -1))
+                    ],
+                  color: Colors.transparent,
+                  fontFamily: "Poppins-SemiBold",
+                  fontSize: 16, // NTS: adjust for device size
+                  decoration: // Add Underline
+                    TextDecoration.underline,
+                    decorationColor: Colors.black,
+                    decorationThickness: 1,
+                ),
+              )
+              )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      )
     );
   }
 }
