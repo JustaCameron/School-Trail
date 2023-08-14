@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:collection/collection.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:school_trail/for_parents_or_staff.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -30,13 +31,22 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Open Sans',
         ),
         home: const MyHomePage(), // Sets home page
+
+        // ROUTES FOR GOING TO DIFFERENT PAGES
+        routes: <String, WidgetBuilder>{
+          "/Home": (BuildContext context) => const MyHomePage(),
+          "/ForStaff": (BuildContext context) => const ForStaffPage(),
+          "/ForParents": (BuildContext context) => const ForParentsPage(),
+        }
       ),
     );
   }
 }
 
 // Controls state of app
-class MyAppState extends ChangeNotifier {}
+class MyAppState extends ChangeNotifier {
+  
+}
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -49,6 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
   // Home Screen
   @override
   Widget build(BuildContext context) {
+    double width = double.parse(MediaQuery.of(context).size.width.toStringAsFixed(0)); // Get screen Width
+    double height = double.parse(MediaQuery.of(context).size.height.toStringAsFixed(0)); // Get screen Height
+    print(width);
+    print(height);
+
+
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(), // Expand image to entire screen
@@ -62,19 +78,34 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             // LOGO & SUBTEXT
-            Padding(
-              padding: const EdgeInsets.only(top: 40), // NTS: adjust for device size
-              child: Container(
-                width: 89, // NTS: adjust for device size
-                height: 89,
-                decoration: const BoxDecoration( // Set logo image
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/logo.png"),
-                    fit: BoxFit.cover,
-                    )
+            if (height == 783 && width == 393) // For 1080x2220 resolution
+              Padding(
+                padding: const EdgeInsets.only(top: 50), // NTS: adjust for device size
+                child: Container(
+                  width: 89, // NTS: adjust for device size
+                  height: 89,
+                  decoration: const BoxDecoration( // Set logo image
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/logo.png"),
+                      fit: BoxFit.cover,
+                      )
+                  ),
                 ),
               ),
-            ),
+            if (height == 759 && width == 393) // For 1080x2220 resolution Android 10<
+              Padding(
+                padding: const EdgeInsets.only(top: 40), // NTS: adjust for device size
+                child: Container(
+                  width: 89, // NTS: adjust for device size
+                  height: 89,
+                  decoration: const BoxDecoration( // Set logo image
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/logo.png"),
+                      fit: BoxFit.cover,
+                      )
+                  ),
+                ),
+              ),
             const Text( // Text under logo
               "SCHOOL TRAIL",
               style: TextStyle(
@@ -118,9 +149,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 50, // NTS: adjust for device size
                 width: 320,
                 child: ElevatedButton(
-                  onPressed: (){}, 
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/ForStaff"); // Goes to page on click
+                  }, 
                   style: ElevatedButton.styleFrom(
-                    elevation: 1.0, // Makes shadow more pronounced
+                    elevation: 2.0, // Makes shadow more pronounced
                     backgroundColor: const Color.fromRGBO(255, 221, 133, 1),
                     shadowColor: const Color.fromRGBO(173, 159, 125, 1),
                     foregroundColor: Colors.transparent,
@@ -147,9 +180,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 50, // NTS: adjust for device size
                 width: 320,
                 child: ElevatedButton(
-                  onPressed: (){}, 
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/ForParents"); // Goes to page on click
+                  }, 
                   style: ElevatedButton.styleFrom(
-                    elevation: 1.0, // Makes shadow more pronounced
+                    elevation: 2.0, // Makes shadow more pronounced
                     backgroundColor: const Color.fromRGBO(255, 221, 133, 1),
                     shadowColor: const Color.fromRGBO(173, 159, 125, 1),
                     foregroundColor: Colors.transparent,
@@ -175,12 +210,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text(
                 "See School Pricing Plans",
                 style: TextStyle(
+                  color: Colors.transparent,
                   shadows: [ // I make the original text transparent and use a shadow instead to position it better above the underline
                     Shadow(
                       color: Color.fromRGBO(45, 62, 74, 1),
                       offset: Offset(0, -1))
                     ],
-                  color: Colors.transparent,
                   fontFamily: "Poppins-SemiBold",
                   fontSize: 16, // NTS: adjust for device size
                   decoration: // Add Underline

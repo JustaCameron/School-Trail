@@ -10,6 +10,7 @@
 .svn/
 migrate_working_dir/
 ref.txt
+example.dart
 
 # IntelliJ related
 *.iml
