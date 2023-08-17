@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:school_trail/signup.dart';
 
 // FOR STAFF PAGE
@@ -348,7 +349,8 @@ class _ForParentsPageState extends State<ForParentsPage> {
                         width: 320,
                         child: ElevatedButton(
                           onPressed: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUpPage(),
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => 
+                            ChangeNotifierProvider.value(value: MyAppState(), child: const SignUpPage(),),
                             maintainState: false)); // Goes to page on click
                           }, 
                           style: ElevatedButton.styleFrom(

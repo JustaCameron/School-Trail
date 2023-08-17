@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
           "/ForStaff": (BuildContext context) => const ForStaffPage(),
           "/ForParents": (BuildContext context) => const ForParentsPage(),
           "/SignUp": (BuildContext context) => const SignUpPage(),
+          "/SecondCreatePage": (BuildContext context) => SecondCreatePage(),
         }
       ),
     );
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
 
 // Controls state of app
 class MyAppState extends ChangeNotifier {
-  
+
 }
 
 class MyHomePage extends StatefulWidget {
