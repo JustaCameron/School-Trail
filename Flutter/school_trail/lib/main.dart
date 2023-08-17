@@ -7,6 +7,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:school_trail/for_parents_or_staff.dart';
+import 'package:school_trail/login.dart';
 import 'package:school_trail/signup.dart';
 
 void main() {
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           "/ForStaff": (BuildContext context) => const ForStaffPage(),
           "/ForParents": (BuildContext context) => const ForParentsPage(),
           "/SignUp": (BuildContext context) => const SignUpPage(),
-          "/SecondCreatePage": (BuildContext context) => SecondCreatePage(),
+          "/Login": (BuildContext context) => const LoginPage(),
         }
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+
 // Controls state of app
 class MyAppState extends ChangeNotifier {
   var prefixGiven = 0;
@@ -169,24 +170,16 @@ class _SignUpPageState extends State<SignUpPage> {
                             }
                             return null; // If everything is valid, send back 'null' meaning no errors
                           },
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true, // Allow colour filling
                             fillColor: Colors.white, // Fill background with colour
-                            border: OutlineInputBorder(borderSide: BorderSide.none),
+                            border: const OutlineInputBorder(borderSide: BorderSide.none),
                             floatingLabelBehavior: FloatingLabelBehavior.never, // Removes annoying floating label text on click
                             labelText: 'Access code', // Text shown in box
-                            labelStyle: TextStyle( // Change label text style
-                              fontFamily: "Poppins-SemiBold",
-                              fontSize: 16,
-                              color: Color.fromRGBO(147, 141, 131, 1)
-                            ),
+                            labelStyle: appState.formStyling,
                             hintText: 'Access code', // Text shown when selected
-                            hintStyle: TextStyle( // Change label text style
-                              fontFamily: "Poppins-SemiBold",
-                              fontSize: 14,
-                              color: Color.fromRGBO(147, 141, 131, 1)
-                            ),
-                            errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+                            hintStyle: appState.hintStyling,
+                            errorBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                           ),
                         )
                       ),
@@ -364,10 +357,10 @@ class _FirstCreatePageState extends State<FirstCreatePage> {
                       padding: const EdgeInsets.only(left: 30, top: 20, right: 20),
                       child: Form(
                         key: firstValidationFormKey, // Validation key
-                        child: SizedBox(
+                        child: SizedBox( // Size of listview
                           width: width/1.1,
                           height: height/1.7,
-                          child: SafeArea(
+                          child: SafeArea( // Prevents collision
                             top: false,
                             child: ListView(
                               children: [
@@ -915,7 +908,7 @@ class _SecondCreatePageState extends State<SecondCreatePage> {
                 ),
               ),
             ),
-            // CONTINUE BUTTON
+            // FINISH BUTTON
             // If all required fields are filled, Continue button will appear, otherwise it will not
             if (addressLineOneController.text != "" && addressLineTwoController.text != ""
                 && cityController.text != "" && parishController.text != "")
@@ -931,7 +924,7 @@ class _SecondCreatePageState extends State<SecondCreatePage> {
                             // If so, do the following
                             secondValidationFormKey.currentState!.reset(); // Reset form key so nothing breaks if user goes back
 
-                            Navigator.of(context).pushNamed("/Home"); // Goes to page on click
+                            Navigator.pushNamedAndRemoveUntil(context, "/Home", (r) => false); // Goes to page on click and removes all other active routes for performance
                         }
                       }, 
                       style: ElevatedButton.styleFrom( // Button config
@@ -943,7 +936,7 @@ class _SecondCreatePageState extends State<SecondCreatePage> {
                         side: BorderSide.none, // Removes border line
                       ),
                       child: const Text(
-                        "Continue",
+                        "Finish",
                         style: TextStyle(
                           fontFamily: "Poppins",
                           fontSize: 18, // NTS: adjust for device size

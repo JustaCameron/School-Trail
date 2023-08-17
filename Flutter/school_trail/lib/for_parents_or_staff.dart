@@ -178,7 +178,12 @@ class _ForStaffPageState extends State<ForStaffPage> {
 
                     // LOGIN BUTTON
                     TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.of(context).pushNamed("/Login"); // Goes to page on click
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => 
+                    // ChangeNotifierProvider.value(value: MyAppState(), child: MyHomePage(),),
+                    // maintainState: true)); // Goes to page on click
+                      }, 
                       child: const Text(
                         "Login",
                         style: TextStyle(
@@ -388,7 +393,9 @@ class _ForParentsPageState extends State<ForParentsPage> {
 
                     // LOGIN BUTTON
                     TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.of(context).pushNamed("/Login"); // Goes to page on click
+                      }, 
                       child: const Text(
                         "Login",
                         style: TextStyle(
