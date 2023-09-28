@@ -6,13 +6,15 @@ import 'dart:ui';
 import 'package:collection/collection.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:school_trail/dashboard.dart';
 import 'package:school_trail/for_parents_or_staff.dart';
 import 'package:school_trail/login.dart';
 import 'package:school_trail/signup.dart';
+import 'package:school_trail/students.dart';
 
 void main() {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized(); // For splash screen
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding); // Preserves splash screen until...
   runApp(const MyApp());
 }
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FlutterNativeSplash.remove();
+    FlutterNativeSplash.remove(); // Removes splash screen once built
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
@@ -41,6 +43,8 @@ class MyApp extends StatelessWidget {
           "/ForParents": (BuildContext context) => const ForParentsPage(),
           "/SignUp": (BuildContext context) => const SignUpPage(),
           "/Login": (BuildContext context) => const LoginPage(),
+          "/Dashboard": (BuildContext context) => const DashboardPage(),
+          "/Students": (BuildContext context) => const StudentPage(),
         }
       ),
     );
@@ -211,7 +215,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // SEE SCHOOL PRICING PLANS BUTTON
             TextButton(
-              onPressed: (){}, 
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed("/Dashboard");
+              }, 
               child: const Text(
                 "See School Pricing Plans",
                 style: TextStyle(
@@ -229,7 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     decorationThickness: 1,
                 ),
               )
-              )
+            )
           ],
         ),
       )

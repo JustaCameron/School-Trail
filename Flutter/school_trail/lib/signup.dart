@@ -155,6 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                     ),
                     
+                    // ACCESS CODE TEXTFORMFIELD
                     Padding(
                       padding: const EdgeInsets.only(left: 30, top: 10, right: 20),
                       child: Form(
