@@ -46,24 +46,23 @@ class _StudentPageState extends State<StudentPage> {
                           color: Color.fromRGBO(90, 109, 124, 1)
                         );
     
-    // Phonics
-    Container phonics = Container(
+    // Student icon
+    Container studentIcon = Container(
                           height: 36,
                           width: 36,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/images/phonics.png")
+                              image: AssetImage("assets/images/Ellipse.png")
                               )
                           ),
                         );
-
-    // Math Basics
-    Container mathBasics = Container(
-                          height: 36,
-                          width: 36,
+    // Absent Icon
+    Container absentIcon = Container(
+                          height: 16,
+                          width: 16,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/images/math.png")
+                              image: AssetImage("assets/images/absent.png")
                               )
                           ),
                         );
@@ -117,16 +116,16 @@ class _StudentPageState extends State<StudentPage> {
 
         switch(selectedIndex){
           case 0: // Students
-            Navigator.of(context).pushNamed("/Home"); // Goes to page on click
+            Navigator.of(context).pushNamed("/Students"); // Goes to page on click
             break;
           case 1: // Terms
-            Navigator.of(context).pushNamed("/Home"); // Goes to page on click
+            Navigator.of(context).pushNamed("/Terms"); // Goes to page on click
             break;
           case 2: // Contacts
             Navigator.of(context).pushNamed("/Home"); // Goes to page on click
             break;
           case 3: // Account
-            Navigator.of(context).pushNamed("/Home"); // Goes to page on click
+            Navigator.of(context).pushNamed("/Account"); // Goes to page on click
             break;
         }
       });
@@ -342,6 +341,7 @@ class _StudentPageState extends State<StudentPage> {
                     ),
                   ),      
 
+                  // Dropdown bar
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Container(
@@ -394,6 +394,21 @@ class _StudentPageState extends State<StudentPage> {
                     ),
                   ),
 
+                  // DATE TEXT
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: Text(
+                      'DATE',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(45, 62, 74, 1)
+                      ),
+                    ),
+                  ),      
+
+                    // Date picker
                     Padding(                          
                       padding: const EdgeInsets.only( //spacing for select date button
                         left: 10,
@@ -429,125 +444,223 @@ class _StudentPageState extends State<StudentPage> {
                         ),
                       ),
                     ),
+                  const SizedBox(height: 10,),
 
-                  // ACTIVE CLASSES TEXT
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, bottom: 5, top: 15), // NTS
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Active Classes",
-                          style: TextStyle(
-                            fontFamily: "Calistoga",
-                            fontSize: 18,
-                            color: Color.fromRGBO(146, 115, 87, 1)
-                          )
-                        ),
-                        const Expanded(child: Text("")), // Left indent for aligning widgets below
-            
-                        // View All Active Classes Button
-                        TextButton(
-                          onPressed: (){}, 
-                          child: const Text(
-                            "View All",
-                            style: TextStyle(
-                              color: Colors.transparent,
-                              shadows: [ // I make the original text transparent and use a shadow instead to position it better above the underline
-                                Shadow(
-                                  color: Color.fromRGBO(45, 62, 74, 1),
-                                  offset: Offset(0, -1))
-                                ],
-                              fontFamily: "Poppins-SemiBold",
-                              fontSize: 14, // NTS: adjust for device size
-                              decoration: // Add Underline
-                                TextDecoration.underline,
-                                decorationColor: Colors.black,
-                                decorationThickness: 1,
-                            ),
-                          )
-                        )
-                      ],
-                    ),
-                  ),
-                  // SHOW ACTIVE CLASSES
-                  if (activeClasses.isNotEmpty)
-                    for (var temp=0; temp <= 2; temp++) // Simulate having a lot of classes, remove later
-                      for (var i=0; i < activeClasses.length; i++)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, bottom: 10),
-                          child: SizedBox(
-                            height: 75, // NTS: adjust for device size
-                            width: 370,
-                            child: ElevatedButton(
-                              onPressed: (){
-                                Navigator.of(context).pushNamed("/Home"); // Goes to activity page on click
-                              }, 
-                              style: ElevatedButton.styleFrom(
-                                alignment: Alignment.centerLeft, // Align text
-                                elevation: 0.0, // Removes shadow
-                                backgroundColor: Colors.white,
-                                foregroundColor: Colors.transparent,
-                                surfaceTintColor: Colors.transparent,
-                                side: BorderSide.none, // Removes border line
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+
+                  // SHOW STUDENTS
+                  if (studentsList.isNotEmpty)
+                    for (var i=0; i < studentsList.length; i++)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, bottom: 10),
+                        child: SizedBox(
+                          height: 160, // NTS: adjust for device size
+                          width: 370,
+                          child: ElevatedButton(
+                            onPressed: (){
+                              Navigator.of(context).pushNamed("/Home"); // Goes to activity page on click
+                            }, 
+                            style: ElevatedButton.styleFrom(
+                              alignment: Alignment.centerLeft, // Align text
+                              elevation: 0.0, // Removes shadow
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.transparent,
+                              surfaceTintColor: Colors.transparent,
+                              side: BorderSide.none, // Removes border line
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Row(
-                                children: [
-                                  if (activeClasses.entries.elementAt(i).key == "Phonics")
-                                    phonics, // Show phonics icon
-                                  if (activeClasses.entries.elementAt(i).key == "Math Basics")
-                                    mathBasics, // Show math basics icon
-                                  
-                                  const SizedBox(width: 15,), // Bit of space
-              
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-              
-                                      // Class Name
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 15), // NTS
-                                        child: Text(
-                                          activeClasses.entries.elementAt(i).key,
-                                          style: const TextStyle(
-                                            fontFamily: "Calistoga",
-                                            fontSize: 20, // NTS: adjust for device size
-                                            color: Color.fromRGBO(80, 57, 0, 1)
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    studentIcon, // temporary grey circle
+                                    
+                                    const SizedBox(width: 15,), // Bit of space
+            
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+            
+                                        // Student Name
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 15), // NTS
+                                          child: Text( // Format: Student Name: (DropOffTime, PickUpTime, PRESENT/ABSENT, DroppedOffBy, PickedUpBy)
+                                            studentsList.entries.elementAt(i).key,
+                                            style: const TextStyle(
+                                              fontFamily: "Poppins-SemiBold",
+                                              fontSize: 16, // NTS: adjust for device size
+                                              color: Color.fromRGBO(22, 40, 54, 1)
+                                              ),
                                             ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            absentIcon, // create if statement to check absent/present when that is implemented
+                                            const SizedBox(width: 5),
+                                            // Absent/Present
+                                            Text(
+                                              studentsList.entries.elementAt(i).value.$3,
+                                              style: const TextStyle(
+                                                fontFamily: "Poppins-SemiBold",
+                                                fontSize: 14, // NTS: adjust for device size
+                                                color: Color.fromRGBO(22, 40, 54, 1)
+                                                ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
+
+                                const SizedBox(height: 5),
+
+                                Row(
+                                  children: [
+                                    
+                                    // Drop off time
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        studentsList.entries.elementAt(i).value.$1.toString(),
+                                        style: const TextStyle(
+                                          fontFamily: "Poppins-SemiBold",
+                                          fontSize: 14, // NTS: adjust for device size
+                                          color: Color.fromRGBO(22, 40, 54, 1)
                                           ),
                                       ),
-                                      Row(
-                                        children: [
-                                          // Number of Students
-                                          Text(
-                                            "${activeClasses.entries.elementAt(i).value.$1.toString()} Students",
-                                            style: const TextStyle(
-                                              fontFamily: "Poppins",
-                                              fontSize: 12, // NTS: adjust for device size
-                                              color: Color.fromRGBO(147, 141, 131, 1)
-                                              ),
+                                    ),
+                                    // const SizedBox(width: 50,), // Bit of space between
+
+                                    const Expanded(child: Text("")),
+
+                                    // Dropped off by
+                                    Text(
+                                      studentsList.entries.elementAt(i).value.$4.toString(),
+                                      style: const TextStyle(
+                                        fontFamily: "Poppins-SemiBold",
+                                        fontSize: 14, // NTS: adjust for device size
+                                        color: Color.fromRGBO(22, 40, 54, 1)
+                                        ),
+                                    ),
+
+                                    // Big block of spacing
+                                    Expanded(child: Text("")),
+                                    Expanded(child: Text("")),
+                                  ],
+                                ),
+                                // Drop off time text
+                                const Row(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "DROP-OFF TIME",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins-SemiBold",
+                                          fontSize: 8, // NTS: adjust for device size
+                                          color: Color.fromRGBO(90, 109, 124, 1)
                                           ),
-                                          const SizedBox(width: 40,), // Bit of space
-                                          // Number of Assignments
-                                          Text(
-                                            "${activeClasses.entries.elementAt(i).value.$2.toString()} Assignments",
-                                            style: const TextStyle(
-                                              fontFamily: "Poppins",
-                                              fontSize: 12, // NTS: adjust for device size
-                                              color: Color.fromRGBO(147, 141, 131, 1)
-                                              ),
+                                      ),
+                                    ),
+
+                                    Expanded(child: Text("")),
+                                    // SizedBox(width: 38,), // Bit of space between
+
+                                      Text(
+                                        "DROPPED-OFF BY",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins-SemiBold",
+                                          fontSize: 8, // NTS: adjust for device size
+                                          color: Color.fromRGBO(90, 109, 124, 1)
                                           ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              ),
-                          ),
+                                      ),
+                                      
+                                      // Big block of spacing
+                                      Expanded(child: Text("")),
+                                      Expanded(child: Text("")),
+                                      Expanded(child: Text("")),
+                                  ],
+                                ),
+                                const SizedBox(height: 10,), // Bit of space
+
+                                Row(
+                                  children: [
+                                    // Pick up time
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        studentsList.entries.elementAt(i).value.$2.toString(),
+                                        style: const TextStyle(
+                                          fontFamily: "Poppins-SemiBold",
+                                          fontSize: 14, // NTS: adjust for device size
+                                          color: Color.fromRGBO(22, 40, 54, 1)
+                                          ),
+                                      ),
+                                    ),
+                                    // const SizedBox(width: 50,), // Bit of space between
+                                    
+                                    const Expanded(child: Text("")),
+
+                                    // Picked up by
+                                    Text(
+                                      studentsList.entries.elementAt(i).value.$5.toString(),
+                                      style: const TextStyle(
+                                        fontFamily: "Poppins-SemiBold",
+                                        fontSize: 14, // NTS: adjust for device size
+                                        color: Color.fromRGBO(22, 40, 54, 1)
+                                        ),
+                                    ),
+
+                                    // Big block of spacing
+                                    Expanded(child: Text("")),
+                                    Expanded(child: Text("")),
+                                  ],
+                                ),
+                                // Pick up time text
+                                const Row(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "PICKED-UP TIME",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins-SemiBold",
+                                          fontSize: 8, // NTS: adjust for device size
+                                          color: Color.fromRGBO(90, 109, 124, 1)
+                                          ),
+                                      ),
+                                    ),
+
+                                    // SizedBox(width: 38,), // Bit of space between
+
+                                    Expanded(child: Text("")),
+
+                                    // Picked up by text
+                                    Text(
+                                      textAlign: TextAlign.left,
+                                      "PICKED-UP BY         ",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins-SemiBold",
+                                        fontSize: 8, // NTS: adjust for device size
+                                        color: Color.fromRGBO(90, 109, 124, 1)
+                                        ),
+                                    ),
+
+                                    // Big block of spacing
+                                    Expanded(child: Text("")),
+                                    Expanded(child: Text("")),
+                                    Expanded(child: Text("")),
+
+                                  ],
+                                ),
+                              ],
+                            ),
+                            ),
                         ),
+                      ),
         
                 ],
               ),

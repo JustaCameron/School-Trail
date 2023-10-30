@@ -81,13 +81,13 @@ class _DashboardPageState extends State<DashboardPage> {
             Navigator.of(context).pushNamed("/Students"); // Goes to page on click
             break;
           case 1: // Terms
-            Navigator.of(context).pushNamed("/Home"); // Goes to page on click
+            Navigator.of(context).pushNamed("/Terms"); // Goes to page on click
             break;
           case 2: // Contacts
             Navigator.of(context).pushNamed("/Home"); // Goes to page on click
             break;
           case 3: // Account
-            Navigator.of(context).pushNamed("/Home"); // Goes to page on click
+            Navigator.of(context).pushNamed("/Account"); // Goes to page on click
             break;
         }
       });
@@ -290,7 +290,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                                 const SizedBox(width: 10,), // Bit of space for aligning
                                 const Text(
-                                  "Assignemnts", // The text
+                                  "Assignments", // The text
                                   style: TextStyle(
                                     fontFamily: "Poppins",
                                     fontSize: 12,

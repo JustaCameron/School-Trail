@@ -6,11 +6,15 @@ import 'dart:ui';
 import 'package:collection/collection.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:school_trail/account.dart';
 import 'package:school_trail/dashboard.dart';
 import 'package:school_trail/for_parents_or_staff.dart';
 import 'package:school_trail/login.dart';
+import 'package:school_trail/messages.dart';
+import 'package:school_trail/notifications.dart';
 import 'package:school_trail/signup.dart';
 import 'package:school_trail/students.dart';
+import 'package:school_trail/terms.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized(); // For splash screen
@@ -45,6 +49,10 @@ class MyApp extends StatelessWidget {
           "/Login": (BuildContext context) => const LoginPage(),
           "/Dashboard": (BuildContext context) => const DashboardPage(),
           "/Students": (BuildContext context) => const StudentPage(),
+          "/Terms": (BuildContext context) => const TermsPage(),
+          "/Account": (BuildContext context) => const AccountPage(),
+          "/Messages": (BuildContext context) => const MessagesPage(),
+          "/Notifications": (BuildContext context) => const NotificationsPage(),
         }
       ),
     );
@@ -216,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // SEE SCHOOL PRICING PLANS BUTTON
             TextButton(
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed("/Dashboard");
+                Navigator.of(context).pushReplacementNamed("/Notifications"); // Temp nav for testing
               }, 
               child: const Text(
                 "See School Pricing Plans",

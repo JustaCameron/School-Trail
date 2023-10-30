@@ -793,7 +793,7 @@ class _SecondCreatePageState extends State<SecondCreatePage> {
                                     if (value!.isEmpty){ // Value = User Input
                                       return '*Required Field'; // Send Error
                                     }
-                                    else if(value.contains(RegExp('[^A-Za-z0-9]'))){ // If the address has symbols
+                                    else if(value.contains(RegExp('[^A-Za-z0-9 ]'))){ // If the address has symbols
                                       return 'Invalid Address';
                                     }
                                     return null; // If everything is valid, send back 'null' meaning no errors
@@ -854,7 +854,6 @@ class _SecondCreatePageState extends State<SecondCreatePage> {
                                     }
                                     return null; // If everything is valid, send back 'null' meaning no errors
                                   },
-                                  obscureText: true, // Replaces text with '***'
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.only(left: 10.0, top: 15.0, bottom: 15.0), // Change size of field
                                     filled: true, // Allow colour filling
@@ -883,7 +882,6 @@ class _SecondCreatePageState extends State<SecondCreatePage> {
                                     }
                                     return null; // If everything is valid, send back 'null' meaning no errors
                                   },
-                                  obscureText: true, // Replaces text with '***'
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.only(left: 10.0, top: 15.0, bottom: 15.0), // Change size of field
                                     filled: true, // Allow colour filling
@@ -925,7 +923,7 @@ class _SecondCreatePageState extends State<SecondCreatePage> {
                             // If so, do the following
                             secondValidationFormKey.currentState!.reset(); // Reset form key so nothing breaks if user goes back
 
-                            Navigator.pushNamedAndRemoveUntil(context, "/Home", (r) => false); // Goes to page on click and removes all other active routes for performance
+                            Navigator.pushNamedAndRemoveUntil(context, "/Dashboard", (r) => false); // Goes to page on click and removes all other active routes for performance
                         }
                       }, 
                       style: ElevatedButton.styleFrom( // Button config
