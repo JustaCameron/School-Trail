@@ -35,15 +35,6 @@ class _NotificationsPageState extends State<NotificationsPage> {
     // Current time (Temporary variable)
     String currentTime = DateFormat.Hm().format(DateTime.now());
 
-
-    // Temporary Messages (have it show latest message when it's actually implemented)
-    var receivedMessages = {"Mrs. Shakespare": ("Hi there!", const AssetImage("assets/images/dog.png")), 
-                            "Cameron Meeks": ("League of legends today after school?", const AssetImage("assets/images/avatar_two.jpg")), 
-                            "John Doe": ("Mrs. Stewart gave me detention :(", const AssetImage("assets/images/dog.png")), 
-                            "Scott Crow": ("As someone who reads a lot, I am telling you, specifically, in science, no one calls jackdaws crows. If you want to be 'specific' like you said, then you shouldn't either. They're not the same thing.", const AssetImage("assets/images/crow.jpg")), 
-                            "Mr. Smith": ("Project grades have been posted, please check your results", const AssetImage("assets/images/dog.png")),
-                            "Mrs. Stewart": ("You have 5 more days to hand in your homework, else I'll be forced to give you detention", const AssetImage("assets/images/avatar.png")),
-                            };
     // Temporary Notifications (have it show latest notification when it's actually implemented)
     var unreadNotifs = {1: ("You dropped off your child today at 8:09am", const AssetImage("assets/images/notif.png")), 
                             2: ("You picked up your child at 3:16pm", const AssetImage("assets/images/notif.png")), 
@@ -82,7 +73,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
       });
     }
 
-    // For Roster & Attendance Tab
+    // For All Notifications & TITLE Tab
     bool vertical = false;
     const List<Widget> tabs = <Widget>[
       Text(
